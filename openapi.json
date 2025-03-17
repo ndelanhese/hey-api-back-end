@@ -3,19 +3,40 @@
   "paths": {
     "/": {
       "get": {
-        "operationId": "AppController_getHello",
-        "parameters": [],
+        "description": "This action returns all cats",
+        "operationId": "getCats",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "This action returns all cats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatEntity"
+                  }
+                }
+              }
+            }
           }
         },
+        "summary": "Get all cats",
         "tags": [
-          "App"
+          "cats"
         ]
       },
       "post": {
-        "operationId": "AppController_createCat",
+        "operationId": "createCat",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -33,20 +54,53 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateCatDto"
+                  "$ref": "#/components/schemas/CatEntity"
                 }
               }
             }
           }
         },
+        "summary": "",
         "tags": [
-          "App"
+          "cats"
         ]
       }
     },
     "/{id}": {
+      "get": {
+        "operationId": "getCatsById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This action returns a cat by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatEntity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The record with the given id was not found."
+          }
+        },
+        "summary": "",
+        "tags": [
+          "cats"
+        ]
+      },
       "put": {
-        "operationId": "AppController_updateCat",
+        "operationId": "updateCat",
         "parameters": [
           {
             "name": "id",
@@ -68,7 +122,7 @@
           }
         },
         "responses": {
-          "200": {
+          "204": {
             "description": "The record has been successfully updated.",
             "content": {
               "application/json": {
@@ -82,12 +136,13 @@
             "description": "The record with the given id was not found."
           }
         },
+        "summary": "",
         "tags": [
-          "App"
+          "cats"
         ]
       },
       "delete": {
-        "operationId": "AppController_deleteCat",
+        "operationId": "deleteCat",
         "parameters": [
           {
             "name": "id",
@@ -99,15 +154,16 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "The record has been successfully deleted."
           },
           "404": {
             "description": "The record with the given id was not found."
           }
         },
+        "summary": "",
         "tags": [
-          "App"
+          "cats"
         ]
       }
     }
@@ -127,6 +183,55 @@
   "servers": [],
   "components": {
     "schemas": {
+      "CatEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The cat id",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The cat name",
+            "example": "Kitty"
+          },
+          "sex": {
+            "type": "string",
+            "description": "The cat sex",
+            "example": "MALE"
+          },
+          "age": {
+            "type": "number",
+            "description": "The cat age",
+            "example": 1
+          },
+          "breed": {
+            "type": "string",
+            "description": "The cat breed",
+            "example": "Persian"
+          },
+          "color": {
+            "type": "string",
+            "description": "The cat color",
+            "example": "White"
+          },
+          "ownerId": {
+            "type": "number",
+            "description": "The cat owner id",
+            "example": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "sex",
+          "age",
+          "breed",
+          "color",
+          "ownerId"
+        ]
+      },
       "CreateCatDto": {
         "type": "object",
         "properties": {

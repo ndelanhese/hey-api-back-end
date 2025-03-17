@@ -12,20 +12,23 @@ async function bootstrap() {
     .setDescription('The cats api documentation')
     .setVersion('1.0')
     .addTag('cats')
+    .setBasePath('api')
     .build();
-  const documentFactory = SwaggerModule.createDocument(app, config);
+  const documentFactory = SwaggerModule.createDocument(app, config, {
+    ignoreGlobalPrefix: true,
+    autoTagControllers: true,
+  });
 
   fs.writeFileSync('./openapi.json', JSON.stringify(documentFactory, null, 2));
-
   app.use(
     '/api',
     apiReference({
       content: documentFactory,
       title: 'Hey api back-end',
       theme: 'dark',
-      url: '/openapi.json',
     }),
   );
+  SwaggerModule.setup('api', app, documentFactory);
 
   await app.listen(3000);
 }
