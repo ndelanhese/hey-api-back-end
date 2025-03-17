@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      },
+      "post": {
+        "operationId": "AppController_createCat",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCatDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The record has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCatDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/{id}": {
+      "put": {
+        "operationId": "AppController_updateCat",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCatDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The record has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCatDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The record with the given id was not found."
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      },
+      "delete": {
+        "operationId": "AppController_deleteCat",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The record has been successfully deleted."
+          },
+          "404": {
+            "description": "The record with the given id was not found."
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Cats example",
+    "description": "The cats api documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "cats",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateCatDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The cat name",
+            "example": "Kitty"
+          },
+          "sex": {
+            "type": "string",
+            "description": "The cat sex",
+            "example": "MALE"
+          },
+          "age": {
+            "type": "number",
+            "description": "The cat age",
+            "example": 1
+          },
+          "breed": {
+            "type": "string",
+            "description": "The cat breed",
+            "example": "Persian"
+          },
+          "color": {
+            "type": "string",
+            "description": "The cat color",
+            "example": "White"
+          },
+          "ownerId": {
+            "type": "number",
+            "description": "The cat owner id",
+            "example": 1
+          }
+        },
+        "required": [
+          "name",
+          "sex",
+          "age",
+          "breed",
+          "color",
+          "ownerId"
+        ]
+      },
+      "UpdateCatDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The cat name",
+            "example": "Kitty"
+          },
+          "sex": {
+            "type": "string",
+            "description": "The cat sex",
+            "example": "MALE"
+          },
+          "age": {
+            "type": "number",
+            "description": "The cat age",
+            "example": 1
+          },
+          "breed": {
+            "type": "string",
+            "description": "The cat breed",
+            "example": "Persian"
+          },
+          "color": {
+            "type": "string",
+            "description": "The cat color",
+            "example": "White"
+          },
+          "ownerId": {
+            "type": "number",
+            "description": "The cat owner id",
+            "example": 1
+          }
+        }
+      }
+    }
+  }
+}
